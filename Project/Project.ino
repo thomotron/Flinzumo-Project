@@ -110,7 +110,7 @@ void drive(int distance, bool stopAtLine)
   }
   else
   {
-    while(!linePresent(REFLECTANCE_THRESHOLD))
+    while(!isLinePresent(REFLECTANCE_THRESHOLD))
     {} // wait
   }
   motors.setSpeeds(0, 0); // stop
@@ -118,7 +118,7 @@ void drive(int distance, bool stopAtLine)
 
 // Returns whether the reflectance array senses a dark presence
 // stirring from the depths
-bool linePresent(int threshold)
+bool isLinePresent(int threshold)
 {
   // Initialise a uint array to hold individual sensor values
   unsigned int sensors[6];
