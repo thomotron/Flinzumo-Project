@@ -109,7 +109,7 @@ void drive(int distance, bool stopAtLine)
   }
   else
   {
-    while(!linePresent())
+    while(!isLinePresent())
     {} // wait
   }
   motors.setSpeeds(0, 0); // stop
