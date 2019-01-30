@@ -89,3 +89,24 @@ void LineCalibrate()
   }
 }
 
+// Returns whether the reflectance array senses a dark presence
+// stirring from the depths
+bool isLinePresent(int threshold)
+{
+  // Initialise a uint array to hold individual sensor values
+  unsigned int sensors[6];
+
+  // Get the position of the line (0-5000, left-to-right)
+  // from the reflectance sensors and populate the array
+  int position = reflectanceSensors.readLine(sensors);
+
+  // Return if any of the sensors read above the threshold
+  for (int i = 0; i < 6; i++)
+  {
+    if (sensors[i] > threshold) return true;
+  }
+
+  // ...otherwise return false
+  return false;
+}
+
