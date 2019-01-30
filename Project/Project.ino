@@ -15,7 +15,7 @@ void lineAlign();
 void lineFollow();
 
 void spin(int angle); // angle in degrees. + is c, - is cc
-void drive(int distance, bool stopAtLine);
+void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine);
 
 // Solve each part of the maze
 void partI();
@@ -95,14 +95,21 @@ void lineCalibrate()
 
 void spin(int angle) // angle in degrees. + is c, - is cc
 {
-  motors.setLeftSpeed(MAX_SPEED * angle/abs(angle));
-  motors.setRightSpeed(-MAX_SPEED * angle/abs(angle));
+  motors.setSpeeds(MAX_SPEED * angle/abs(angle), -MAX_SPEED * angle/abs(angle));
   delay(angle*3.3); // will need to calibrate this later, based off 300 ms for 90 deg
 }
 
-void drive(int distance, bool stopAtLine)
+void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
 {
-  motors.setSpeeds(MAX_SPEED, MAX_SPEED);
+  if(ratioLR < 1.0f)
+  {
+    motors.setSpeeds(MAX_SPEED*relSpeed*ratioLR, MAX_SPEED*relSpeed);
+  }
+  else
+  {
+    motors.setSpeeds(MAX_SPEED*relSpeed, MAX_SPEED*relSpeed/ratioLR);
+  }
+  
   if(stopAtLine)
   {
     delay(distance*100); // needs calibration, just an estimate
