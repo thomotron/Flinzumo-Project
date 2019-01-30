@@ -8,6 +8,7 @@ ZumoMotors motors;
 Pushbutton button(ZUMO_BUTTON);
 
 #define MAX_SPEED 400
+#define REFLECTANCE_THRESHOLD 500
 
 // Helpful tools
 void lineCalibrate();
@@ -116,9 +117,50 @@ void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
   }
   else
   {
-    while(!isLinePresent())
+    while(!isLinePresent(REFLECTANCE_THRESHOLD))
     {} // wait
   }
   motors.setSpeeds(0, 0); // stop
 }
 
+// Returns whether the reflectance array senses a dark presence
+// stirring from the depths
+bool isLinePresent(int threshold)
+{
+  // Initialise a uint array to hold individual sensor values
+  unsigned int sensors[6];
+
+  // Get the position of the line (0-5000, left-to-right)
+  // from the reflectance sensors and populate the array
+  int position = refSensors.readLine(sensors);
+
+  // Return if any of the sensors read above the threshold
+  for (int i = 0; i < 6; i++)
+  {
+    if (sensors[i] > threshold) return true;
+  }
+
+  // ...otherwise return false
+  return false;
+}
+
+// Returns the line position as a percentage from the centre.
+// Negative values indicate the line is within the left half of
+// the reflectance array, positive values indicate the line is
+// within the right half.
+float linePositionFromCentre()
+{
+  // Initialise a uint array to hold individual sensor values
+  unsigned int sensors[6];
+
+  // Get the position of the line (0-5000, left-to-right)
+  // from the reflectance sensors and populate the array
+  int position = refSensors.readLine(sensors);
+
+  // Get the position of the line relative to the centre of the reflectance array
+  int centredPosition = position - 2500;
+
+  // Return the centre-relative position as a percentage from the centre
+  // (e.g. '43% to the left' or '6% to the right')
+  return centredPosition / 2500;
+}
