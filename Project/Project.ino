@@ -24,9 +24,17 @@ void partII();
 void partIII();
 
 void setup() {
-  // put your setup code here, to run once:
+  // Wait until we're ready to calibrate
+  button.waitForButton();
+
+  // Initialise the reflectance sensors and start calibration
   refSensors.init();
   lineCalibrate();
+
+  // Wait until we're ready to start
+  button.waitForButton();
+
+  // Run each part
 }
 
 void loop() {
