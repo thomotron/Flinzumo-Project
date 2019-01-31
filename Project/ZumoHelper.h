@@ -85,6 +85,24 @@ void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
   motors.setSpeeds(0, 0); // stop
 }
 
+// Spins until a line is detected at the given position from the centre (give or take the threshold)
+void spinUntilLineAt(int direction, float distanceFromCentre, float threshold)
+{
+  while (true)
+  {
+    spin(direction > 0 ? 1 : -1);
+    if (isLinePresent(REFLECTANCE_THRESHOLD))
+    {
+      float posFromCentre = linePositionFromCentre();
+      if (posFromCentre < (distanceFromCentre + threshold) &&
+          posFromCentre > (distanceFromCentre - threshold))
+      {
+        return;
+      }
+    }
+  }
+}
+
 // Returns whether the reflectance array senses a dark presence
 // stirring from the depths
 bool isLinePresent(int threshold)

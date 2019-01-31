@@ -6,7 +6,7 @@
 #ifdef DEBUG
   #define PAUSE button.waitForButton();
 #else
-  #define PAUSE delay(500);
+  #define PAUSE delay(300);
 #endif
 
 // Solve each part of the maze
