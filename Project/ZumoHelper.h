@@ -20,13 +20,9 @@ Pushbutton button(ZUMO_BUTTON);
 #define RELSPEED_NORMAL 0.8
 #define RELSPEED_FAST 1
 
-// 2.8 @ 5.25v
-// 3.8 @ 4.9v
-#define SPIN_MS_PER_DEG 2.8
-
 // Helpful tools
 void lineCalibrate();
-void lineAlign();
+void lineAlign(int offset);
 void lineFollow();
 bool isLinePresent(int threshold);
 float linePositionFromCentre();
@@ -58,7 +54,8 @@ void lineCalibrate()
 void spin(int angle) // angle in degrees. + is c, - is cc
 {
   motors.setSpeeds(MAX_SPEED * angle/abs(angle), -MAX_SPEED * angle/abs(angle));
-  delay(abs(angle)*SPIN_MS_PER_DEG); // will need to calibrate this later, based off 300 ms for 90 deg
+  delay(abs(angle)*2.8); // will need to calibrate this later, based off 300 ms for 90 deg
+                         // Calibrated to 2.8ms/deg at 5.25v
   motors.setSpeeds(0, 0);
 }
 
@@ -83,24 +80,6 @@ void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
     {} // wait
   }
   motors.setSpeeds(0, 0); // stop
-}
-
-// Spins until a line is detected at the given position from the centre (give or take the threshold)
-void spinUntilLineAt(int direction, float distanceFromCentre, float threshold)
-{
-  while (true)
-  {
-    spin(direction > 0 ? 1 : -1);
-    if (isLinePresent(REFLECTANCE_THRESHOLD))
-    {
-      float posFromCentre = linePositionFromCentre();
-      if (posFromCentre < (distanceFromCentre + threshold) &&
-          posFromCentre > (distanceFromCentre - threshold))
-      {
-        return;
-      }
-    }
-  }
 }
 
 // Returns whether the reflectance array senses a dark presence
@@ -145,22 +124,24 @@ float linePositionFromCentre()
   return centredPosition / 2500;
 }
 
-void lineAlign()
+void lineAlign(int offset)
 {
   int movSpeed = 0.5*MAX_SPEED;
   int lastError = 0;
   unsigned int sensors[6];
+  float Kp = 1/3;
+  float Kd = 3;
 
   // Move back and forwards a few times to line up properly
   for(int j = 0; j < 5; j++)
  {
     // Move forward a lil
    
-    for(int i = 0; i < 150; i++)
+    for(int i = 0; i < 100; i++)
     {
       int pos = refSensors.readLine(sensors);
-      int error = pos - 2500;
-      int speedDifference = error * 1/3 + 3 * (error - lastError);
+      int error = pos - 2500 - offset;
+      int speedDifference = error * Kp + Kd * (error - lastError);
       lastError = error;
   
       // Find motor speeds
@@ -172,14 +153,14 @@ void lineAlign()
       m2Speed = (abs(m2Speed) + m2Speed)/2 - ((m2Speed-movSpeed) + abs(m2Speed - movSpeed))/2;
       motors.setSpeeds(m1Speed, m2Speed);
     }
-    delay(50);
+    delay(200);
     
     // Move back a lil
-    for(int i = 0; i < 150; i++)
+    for(int i = 0; i < 100; i++)
     {
       int pos = refSensors.readLine(sensors);
-      int error = pos - 2500;
-      int speedDifference = error * 1/3 + 3 * (error - lastError);
+      int error = pos - 2500 - offset;
+      int speedDifference = error * Kp + Kd * (error - lastError);
       lastError = error;
   
       // Find motor speeds
@@ -191,7 +172,7 @@ void lineAlign()
       m2Speed = (-abs(m2Speed) + m2Speed)/2 - ((m2Speed+movSpeed) - abs(m2Speed + movSpeed))/2;
       motors.setSpeeds(m1Speed, m2Speed);
     }
-    delay(50);
+    delay(200);
  }
 
  motors.setSpeeds(0, 0);
