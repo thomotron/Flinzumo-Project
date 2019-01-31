@@ -107,7 +107,8 @@ void lineCalibrate()
 void spin(int angle) // angle in degrees. + is c, - is cc
 {
   motors.setSpeeds(MAX_SPEED * angle/abs(angle), -MAX_SPEED * angle/abs(angle));
-  delay(abs(angle)*3.3); // will need to calibrate this later, based off 300 ms for 90 deg
+  delay(abs(angle)*2.8); // will need to calibrate this later, based off 300 ms for 90 deg
+                         // Calibrated to 2.8ms/deg at 5.25v
   motors.setSpeeds(0, 0);
 }
 
