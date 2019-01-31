@@ -86,7 +86,6 @@ void partI()
 
 void lineCalibrate()
 {
-  refSensors.init();
   for(int i = 0; i < 80; i++)
   {
     if((i > 10 && i <= 30) || (i > 50 && i <= 70))
