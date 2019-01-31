@@ -90,8 +90,7 @@ void partII()
   PAUSE
   drive(3, -RELSPEED_NORMAL, 1, true);  // Reverse until the alignment line
   PAUSE
-  drive(1, -RELSPEED_NORMAL, 1, false);  // Drive a bit to get off the alignment line
-  PAUSE
+  drive(1, -RELSPEED_NORMAL, 1, false); // Drive a bit to get off the alignment line
   drive(20, -RELSPEED_NORMAL, 1, true); // Reverse until the embassy
   PAUSE
   spin(-90);                            // Turn to face east
