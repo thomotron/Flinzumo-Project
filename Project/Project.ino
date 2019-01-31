@@ -100,6 +100,9 @@ void lineCalibrate()
     refSensors.calibrate();
     delay(20); // Total delay of 20*80 = 1600 ms
   }
+
+  // Stop the motors after calibrating
+  motors.setSpeeds(0, 0);
 }
 
 void spin(int angle) // angle in degrees. + is c, - is cc
