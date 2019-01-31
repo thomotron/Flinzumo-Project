@@ -127,7 +127,7 @@ void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
     motors.setSpeeds(MAX_SPEED*relSpeed, MAX_SPEED*relSpeed/ratioLR);
   }
   
-  if(stopAtLine)
+  if(!stopAtLine)
   {
     delay(distance*100); // needs calibration, just an estimate
   }
