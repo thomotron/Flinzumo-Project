@@ -20,6 +20,10 @@ Pushbutton button(ZUMO_BUTTON);
 #define RELSPEED_NORMAL 0.8
 #define RELSPEED_FAST 1
 
+// 2.8 @ 5.25v
+// 3.8 @ 4.9v
+#define SPIN_MS_PER_DEG 2.8
+
 // Helpful tools
 void lineCalibrate();
 void lineAlign();
@@ -54,8 +58,7 @@ void lineCalibrate()
 void spin(int angle) // angle in degrees. + is c, - is cc
 {
   motors.setSpeeds(MAX_SPEED * angle/abs(angle), -MAX_SPEED * angle/abs(angle));
-  delay(abs(angle)*2.8); // will need to calibrate this later, based off 300 ms for 90 deg
-                         // Calibrated to 2.8ms/deg at 5.25v
+  delay(abs(angle)*SPIN_MS_PER_DEG); // will need to calibrate this later, based off 300 ms for 90 deg
   motors.setSpeeds(0, 0);
 }
 
@@ -80,6 +83,24 @@ void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
     {} // wait
   }
   motors.setSpeeds(0, 0); // stop
+}
+
+// Spins until a line is detected at the given position from the centre (give or take the threshold)
+void spinUntilLineAt(int direction, float distanceFromCentre, float threshold)
+{
+  while (true)
+  {
+    spin(direction > 0 ? 1 : -1);
+    if (isLinePresent(REFLECTANCE_THRESHOLD))
+    {
+      float posFromCentre = linePositionFromCentre();
+      if (posFromCentre < (distanceFromCentre + threshold) &&
+          posFromCentre > (distanceFromCentre - threshold))
+      {
+        return;
+      }
+    }
+  }
 }
 
 // Returns whether the reflectance array senses a dark presence

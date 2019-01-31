@@ -1,6 +1,13 @@
 
 #include "ZumoHelper.h"
 
+//#define DEBUG
+
+#ifdef DEBUG
+  #define PAUSE button.waitForButton();
+#else
+  #define PAUSE delay(300);
+#endif
 
 // Solve each part of the maze
 void partI();
@@ -73,19 +80,20 @@ void partI()
 void partII()
 {
   drive(1, RELSPEED_NORMAL, 1, false);  // Overshoot line at embassy a little
-  button.waitForButton();
-  spin(90);               // Turn to face south
-  button.waitForButton();
+  PAUSE
+  spin(90);                             // Turn to face south
+  PAUSE
   drive(5, RELSPEED_NORMAL, 1, false);  // Drive a bit to get off the embassy alignment line
-  button.waitForButton();
+  PAUSE
   drive(20, RELSPEED_NORMAL, 1, true);  // Drive into the blue sticks until the alignment line
-  button.waitForButton();
+  PAUSE
   drive(3, RELSPEED_NORMAL, 1, false);  // Push the sticks into the safe zone
-  button.waitForButton();
+  PAUSE
   drive(3, -RELSPEED_NORMAL, 1, true);  // Reverse until the alignment line
-  button.waitForButton();
+  PAUSE
+  drive(1, -RELSPEED_NORMAL, 1, false); // Drive a bit to get off the alignment line
   drive(20, -RELSPEED_NORMAL, 1, true); // Reverse until the embassy
-  button.waitForButton();
-  spin(-90);              // Turn to face east
+  PAUSE
+  spin(-90);                            // Turn to face east
 }
 
