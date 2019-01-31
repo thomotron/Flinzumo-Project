@@ -108,6 +108,7 @@ void spin(int angle) // angle in degrees. + is c, - is cc
 {
   motors.setSpeeds(MAX_SPEED * angle/abs(angle), -MAX_SPEED * angle/abs(angle));
   delay(angle*3.3); // will need to calibrate this later, based off 300 ms for 90 deg
+  motors.setSpeeds(0, 0);
 }
 
 void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
