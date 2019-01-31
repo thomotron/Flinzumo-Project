@@ -73,8 +73,8 @@ void loop() {
 
 void partI()
 {
-  motors.setSpeeds(400, 400);
-  
+  drive(5, RELSPEED_NORMAL, 1, false); // Leave the starting gate
+  drive(30, RELSPEED_NORMAL, 1, true); // Get to the first alignment line
 }
 
 void partII()
