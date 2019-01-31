@@ -124,24 +124,22 @@ float linePositionFromCentre()
   return centredPosition / 2500;
 }
 
-void lineAlign(int offset)
+void lineAlign()
 {
   int movSpeed = 0.5*MAX_SPEED;
   int lastError = 0;
   unsigned int sensors[6];
-  float Kp = 1/3;
-  float Kd = 3;
 
   // Move back and forwards a few times to line up properly
   for(int j = 0; j < 5; j++)
  {
     // Move forward a lil
    
-    for(int i = 0; i < 100; i++)
+    for(int i = 0; i < 150; i++)
     {
       int pos = refSensors.readLine(sensors);
-      int error = pos - 2500 - offset;
-      int speedDifference = error * Kp + Kd * (error - lastError);
+      int error = pos - 2500;
+      int speedDifference = error * 1/3 + 3 * (error - lastError);
       lastError = error;
   
       // Find motor speeds
@@ -153,14 +151,14 @@ void lineAlign(int offset)
       m2Speed = (abs(m2Speed) + m2Speed)/2 - ((m2Speed-movSpeed) + abs(m2Speed - movSpeed))/2;
       motors.setSpeeds(m1Speed, m2Speed);
     }
-    delay(200);
+    delay(50);
     
     // Move back a lil
-    for(int i = 0; i < 100; i++)
+    for(int i = 0; i < 150; i++)
     {
       int pos = refSensors.readLine(sensors);
-      int error = pos - 2500 - offset;
-      int speedDifference = error * Kp + Kd * (error - lastError);
+      int error = pos - 2500;
+      int speedDifference = error * 1/3 + 3 * (error - lastError);
       lastError = error;
   
       // Find motor speeds
@@ -172,9 +170,8 @@ void lineAlign(int offset)
       m2Speed = (-abs(m2Speed) + m2Speed)/2 - ((m2Speed+movSpeed) - abs(m2Speed + movSpeed))/2;
       motors.setSpeeds(m1Speed, m2Speed);
     }
-    delay(200);
+    delay(50);
  }
 
  motors.setSpeeds(0, 0);
 }
-
