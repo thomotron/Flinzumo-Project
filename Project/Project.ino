@@ -10,6 +10,10 @@ Pushbutton button(ZUMO_BUTTON);
 #define MAX_SPEED 400
 #define REFLECTANCE_THRESHOLD 500
 
+#define RELSPEED_SLOW 0.3
+#define RELSPEED_NORMAL 0.8
+#define RELSPEED_FAST 1
+
 // Helpful tools
 void lineCalibrate();
 void lineAlign();
