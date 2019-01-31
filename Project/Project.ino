@@ -16,17 +16,18 @@ void setup() {
   lineCalibrate();
 
   // Wait until we're ready to start
-  button.waitForButton();
-
+  //button.waitForButton();
+  lineAlign();
   // Run each part
-  partII();
+  //partII();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
   button.waitForButton();
-
+  lineAlign();
+  
   // Part 1:
   // Move forward to button (line 1)
   // Turn left slightly, move forward slightly

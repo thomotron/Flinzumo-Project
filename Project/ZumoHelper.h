@@ -123,3 +123,56 @@ float linePositionFromCentre()
   // (e.g. '43% to the left' or '6% to the right')
   return centredPosition / 2500;
 }
+
+void lineAlign()
+{
+  int movSpeed = 0.5*MAX_SPEED;
+  int lastError = 0;
+  unsigned int sensors[6];
+
+  // Move back and forwards a few times to line up properly
+  for(int j = 0; j < 5; j++)
+ {
+    // Move forward a lil
+   
+    for(int i = 0; i < 150; i++)
+    {
+      int pos = refSensors.readLine(sensors);
+      int error = pos - 2500;
+      int speedDifference = error * 1/3 + 3 * (error - lastError);
+      lastError = error;
+  
+      // Find motor speeds
+      int m1Speed = movSpeed + speedDifference;
+      int m2Speed = movSpeed - speedDifference;
+  
+      // Constrain motor speeds between 0 and MAX_SPEED
+      m1Speed = (abs(m1Speed) + m1Speed)/2 - ((m1Speed-movSpeed) + abs(m1Speed - movSpeed))/2;
+      m2Speed = (abs(m2Speed) + m2Speed)/2 - ((m2Speed-movSpeed) + abs(m2Speed - movSpeed))/2;
+      motors.setSpeeds(m1Speed, m2Speed);
+    }
+    delay(50);
+    
+    // Move back a lil
+    for(int i = 0; i < 150; i++)
+    {
+      int pos = refSensors.readLine(sensors);
+      int error = pos - 2500;
+      int speedDifference = error * 1/3 + 3 * (error - lastError);
+      lastError = error;
+  
+      // Find motor speeds
+      int m1Speed = -movSpeed + speedDifference;
+      int m2Speed = -movSpeed - speedDifference;
+  
+      // Constrain motor speeds between 0 and -MAX_SPEED
+      m1Speed = (-abs(m1Speed) + m1Speed)/2 - ((m1Speed+movSpeed) - abs(m1Speed + movSpeed))/2;
+      m2Speed = (-abs(m2Speed) + m2Speed)/2 - ((m2Speed+movSpeed) - abs(m2Speed + movSpeed))/2;
+      motors.setSpeeds(m1Speed, m2Speed);
+    }
+    delay(50);
+ }
+
+ motors.setSpeeds(0, 0);
+}
+
