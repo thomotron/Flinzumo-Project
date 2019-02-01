@@ -98,3 +98,15 @@ void partIII()
   spin(-90);              // Turn to face east
 }
 
+void partIV()
+{
+  drive(5, RELSPEED_NORMAL, 1.0f, false);  // move back away from building slightly
+  spin(-90);                               // spin face N
+  drive(10, RELSPEED_NORMAL, 1.0f, true);  // drive till line
+  drive(-10, RELSPEED_NORMAL, 0.8, false); // reverse curve left
+  spin(100);                               // spin to face S (slightly W)
+  drive(15, RELSPEED_NORMAL, 0.9, true);   // drive forwards curving slight right, stop at line
+
+  // Align perpendicular to line if possible
+}
+
