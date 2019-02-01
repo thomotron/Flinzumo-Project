@@ -13,6 +13,14 @@
 void partI();
 void partII();
 void partIII();
+void partIV();
+void partV();
+void partVI();
+void partVII();
+void partVIII();
+void partIX();
+void partX();
+void partXI();
 
 void setup() {
   // Wait until we're ready to calibrate
