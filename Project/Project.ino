@@ -88,9 +88,11 @@ void partIV()
 
 void partV()
 {
-  spin(-110);                           // Turn to face north
+  drive(0.5, -RELSPEED_NORMAL, 1.0f, false);  // move back away from building slightly
   PAUSE
-  drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the shop on the corner
+  spin(-105);                               // spin face N
+  PAUSE
+  drive(3, RELSPEED_NORMAL, 1.0f, true);  // drive till line
 }
 
 void partVI()
@@ -107,4 +109,26 @@ void partVII()
   drive(20, RELSPEED_NORMAL, 1, true);  // Push the sandbags until we hit the alignment line
   drive(5, RELSPEED_NORMAL, 1, false);  // Push the sandbags into the safe zone
   drive(5, -RELSPEED_NORMAL, 1, true);  // Back up the the alignment line
+}
+
+void partVIII()
+{
+  spin(-90);
+  PAUSE
+  motors.setSpeeds(RELSPEED_NORMAL*MAX_SPEED, RELSPEED_NORMAL*MAX_SPEED);
+  unsigned int sensors[6];
+  refSensors.readLine(sensors);
+  while(sensors[5] < REFLECTANCE_THRESHOLD) // wait til line on right
+  {
+    refSensors.readLine(sensors);
+  }
+  motors.setSpeeds(0,0);
+  PAUSE
+  spin(-50);
+  PAUSE
+  drive(3, RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  PAUSE
+  drive(3, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  PAUSE
+  spin(50);
 }
