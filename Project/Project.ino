@@ -81,6 +81,7 @@ void partIV()
 void partV()
 {
   spin(-110);                           // Turn to face north
+  PAUSE
   drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the shop on the corner
 }
 
