@@ -118,3 +118,23 @@ void partIV()
   // Align perpendicular to line if possible
 }
 
+void partV()
+{
+  spin(-110);                           // Turn to face north
+  drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the shop on the corner
+}
+
+void partVI()
+{
+  spin(-120);                           // Turn to face the south west
+  drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the man stranded on the island
+}
+
+void partVII()
+{
+  drive(5, RELSPED_NORMAL, 1, false);   // Reverse back from the island
+  spin(45);                             // Spin 45 degrees to face west
+  drive(20, RELSPEED_NORMAL, 1, true);  // Push the sandbags until we hit the alignment line
+  drive(5, RELSPEED_NORMAL, 1, false);  // Push the sandbags into the safe zone
+  drive(5, -RELSPEED_NORMAL, 1, true);  // Back up the the alignment line
+}
