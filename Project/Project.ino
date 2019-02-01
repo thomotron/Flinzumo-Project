@@ -34,41 +34,7 @@ void loop() {
 
   button.waitForButton();
   lineAlign();
-  
-  // Part 1:
-  // Move forward to button (line 1)
-  // Turn left slightly, move forward slightly
-  // Reverse last movemvent
-  // Align on line 1
 
-  // Part 2:
-  // Turn right and move to next line. Stop at house.
-  // Align to line 2, face South. Follow line South to line 3
-  // Push blue things forward a little. Reverse to line 3
-  // Reverse to line 2
-  // Align on line 2, face East
-
-  // Part 3:
-  // Move forward for a while
-  // Turn South and keep moving forward to line 4
-  // Align on line 4
-  // Reverse till line 5
-
-  // Forward then turn North
-  // Pause at house (line 6)
-  // Reverse slightly
-  // 180
-  // Move South to line 7. Pause at person
-  // Reverse and face West
-
-  // Move forward to line 5
-  // Align and face South
-  // Move South till line 8
-  // Turn slightly East, move forward slightly
-  // Reverse last movement
-
-  // Reverse along line 5...
-  
 }
 
 void partI()
