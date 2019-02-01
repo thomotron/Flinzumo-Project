@@ -28,7 +28,7 @@ bool isLinePresent(int threshold);
 float linePositionFromCentre();
 
 void spin(int angle); // angle in degrees. + is c, - is cc
-void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine); // distance in cm, ratioLR is the ratio between L and R power
+void drive(float ds, float relSpeed, float ratioLR, bool stopAtLine); // distance in cm, ratioLR is the ratio between L and R power
 
 
 void lineCalibrate()
@@ -59,7 +59,7 @@ void spin(int angle) // angle in degrees. + is c, - is cc
   motors.setSpeeds(0, 0);
 }
 
-void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
+void drive(float ds, float relSpeed, float ratioLR, bool stopAtLine)
 {
   if(ratioLR < 1.0f)
   {
@@ -72,7 +72,7 @@ void drive(int distance, float relSpeed, float ratioLR, bool stopAtLine)
   
   if(!stopAtLine)
   {
-    delay(distance*100); // needs calibration, just an estimate
+    delay(ds*100); // needs calibration, just an estimate
   }
   else
   {
