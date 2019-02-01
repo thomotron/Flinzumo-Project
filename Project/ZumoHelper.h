@@ -13,10 +13,13 @@ ZumoReflectanceSensorArray refSensors;
 ZumoMotors motors;
 Pushbutton button(ZUMO_BUTTON);
 
-// 2.8 @ 5.25v
-// 3.2 @ 4.9v
-// 3.8 @ 4.4v
 #define SPIN_MS_PER_DEG 3.8
+// 5.25 @ 2.8
+// 4.9  @ 3.2
+// 4.4  @ 3.8
+// 4.29 @ 4
+// 4.18 @ 4.1
+// 4.5  @ 3.75
 
 #define MAX_SPEED 400
 #define REFLECTANCE_THRESHOLD 500
