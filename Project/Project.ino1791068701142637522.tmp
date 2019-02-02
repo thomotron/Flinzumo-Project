@@ -1,7 +1,7 @@
 
 #include "ZumoHelper.h"
 
-//#define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
   #define PAUSE button.waitForButton();
@@ -32,7 +32,7 @@ void setup() {
 
   // Wait until we're ready to start
   //button.waitForButton();
-  lineAlign();
+  //lineAlign();
   // Run each part
   //partII();
 }
@@ -41,7 +41,9 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   button.waitForButton();
-  lineAlign();
+  partVIII();
+  PAUSE
+  partIX();
 
 }
 
@@ -133,21 +135,11 @@ void partVIII()
   spin(50);
 }
 
-void partIXA()
+void partIX()
 {
-  spin(50);
+  spin(45);
   PAUSE
-  drive(2, RELSPEED_NORMAL*MAX_SPEED, 1, false);
-  PAUSE
+  drive(1, RELSPEED_NORMAL*MAX_SPEED, 1, false);
   drive(5, RELSPEED_NORMAL*MAX_SPEED, 1, true);
   PAUSE
-}
-
-void partXA()
-{
-  drive(2, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
-  PAUSE
-  spin(-135);
-  PAUSE
-  drive(30, RELSPEED_NORMAL*MAX_SPEED, 1, true);
 }
