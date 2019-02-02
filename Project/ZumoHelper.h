@@ -13,6 +13,16 @@ ZumoReflectanceSensorArray refSensors;
 ZumoMotors motors;
 Pushbutton button(ZUMO_BUTTON);
 
+// 5.25v @ 2.8
+// 4.9v  @ 3.2
+// 4.4v  @ 3.8
+// 4.29v @ 4
+// 4.18v @ 4.1
+// 4.5v  @ 3.75
+// 4.2v  @ 4.5
+// See https://docs.google.com/spreadsheets/d/1VfWMEkVNKwyjC4wNBs2La0Xxqw591FsvnoYbH0FLOD4/edit?usp=sharing
+#define SPIN_MS_PER_DEG 4.5
+
 #define MAX_SPEED 400
 #define REFLECTANCE_THRESHOLD 500
 
@@ -54,7 +64,7 @@ void lineCalibrate()
 void spin(int angle) // angle in degrees. + is c, - is cc
 {
   motors.setSpeeds(MAX_SPEED * angle/abs(angle), -MAX_SPEED * angle/abs(angle));
-  delay(abs(angle)*2.8); // will need to calibrate this later, based off 300 ms for 90 deg
+  delay(abs(angle)*SPIN_MS_PER_DEG); // will need to calibrate this later, based off 300 ms for 90 deg
                          // Calibrated to 2.8ms/deg at 5.25v
   motors.setSpeeds(0, 0);
 }

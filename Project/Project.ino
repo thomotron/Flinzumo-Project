@@ -53,11 +53,19 @@ void partI()
 
 void partII()
 {
-  drive(3, RELSPEED_NORMAL, 0.6, false);  // Veer left into the bottle cap
-  drive(3, -RELSPEED_NORMAL, 0.6, true);  // Return to where we started
-  drive(2, RELSPEED_NORMAL, 1.4, false);  // Veer right a little so we don't hit the cap again
+  drive(5, RELSPEED_NORMAL, 0.3, false);  // Veer left into the bottle cap
+  PAUSE
+  drive(10, -RELSPEED_NORMAL, 0.3, true); // Return to where we started
+  PAUSE
+  drive(2, RELSPEED_NORMAL, 1, false);    // Drive forward a bit so we miss the corner
+  PAUSE
   spin(45);                               // Turn to face the embassy
-  drive(5, RELSPEED_NORMAL, 1, true);     // Drive until we hit the embassy
+  PAUSE
+  drive(4, RELSPEED_NORMAL, 1, false);    // Drive a little
+  PAUSE
+  spin(45);                               // Turn to face the alignment line
+  PAUSE
+  drive(10, RELSPEED_NORMAL, 1, true);    // Drive until we hit the embassy
 }
 
 void partIII()
@@ -104,7 +112,7 @@ void partVI()
 
 void partVII()
 {
-  drive(5, RELSPEED_NORMAL, 1, false);   // Reverse back from the island
+  drive(5, RELSPEED_NORMAL, 1, false);  // Reverse back from the island
   spin(45);                             // Spin 45 degrees to face west
   drive(20, RELSPEED_NORMAL, 1, true);  // Push the sandbags until we hit the alignment line
   drive(5, RELSPEED_NORMAL, 1, false);  // Push the sandbags into the safe zone
