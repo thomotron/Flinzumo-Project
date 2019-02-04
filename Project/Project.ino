@@ -24,6 +24,10 @@ void partX();
 void partXI();
 
 void setup() {
+  // Set up the LED
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+
   // Flip the motors if we need to
   #ifdef FLIP_MOTORS
     motors.flipLeftMotor(true);
@@ -34,8 +38,10 @@ void setup() {
   button.waitForButton();
 
   // Initialise the reflectance sensors and start calibration
+  digitalWrite(13, HIGH);
   refSensors.init();
   lineCalibrate();
+  digitalWrite(13, LOW);
 
   // Wait until we're ready to start
   //button.waitForButton();
