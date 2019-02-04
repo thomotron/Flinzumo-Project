@@ -2,6 +2,7 @@
 #include "ZumoHelper.h"
 
 //#define DEBUG
+#define FLIP_MOTORS
 
 #ifdef DEBUG
   #define PAUSE button.waitForButton();
@@ -29,18 +30,33 @@ void partXB();
 void partXIB();
 
 void setup() {
+  // Set up the LED
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+
+  // Flip the motors if we need to
+  #ifdef FLIP_MOTORS
+    motors.flipLeftMotor(true);
+    motors.flipRightMotor(true);
+  #endif
+  
   // Wait until we're ready to calibrate
   button.waitForButton();
 
   // Initialise the reflectance sensors and start calibration
+  digitalWrite(13, HIGH);
   refSensors.init();
   lineCalibrate();
+  digitalWrite(13, LOW);
 
   // Wait until we're ready to start
-  //button.waitForButton();
-  lineAlign();
+  button.waitForButton();
+  
   // Run each part
-  //partII();
+  partI();
+  partII();
+  partIII();
+  partIV();
 }
 
 void loop() {
