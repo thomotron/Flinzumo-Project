@@ -2,7 +2,7 @@
 #include "ZumoHelper.h"
 
 //#define DEBUG
-#define FLIP_MOTORS
+//#define FLIP_MOTORS
 
 #ifdef DEBUG
   #define PAUSE button.waitForButton();
@@ -23,7 +23,6 @@ void partVIII();
 // Path A (preferred, but lazy)
 void partIXA();
 void partXA();
-void partXIA();
 
 // Path B
 void partIXB();
@@ -41,7 +40,7 @@ void setup() {
     motors.flipLeftMotor(true);
     motors.flipRightMotor(true);
   #endif
-  
+
   // Wait until we're ready to calibrate
   button.waitForButton();
 
@@ -53,7 +52,7 @@ void setup() {
 
   // Wait until we're ready to start
   button.waitForButton();
-  
+
   // Run each part
   partI();
   partII();
@@ -68,8 +67,12 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   button.waitForButton();
-  lineAlign();
-
+  partVIII();
+  PAUSE
+  partIXA();
+  PAUSE
+  partXA();
+  PAUSE
 }
 
 void partI()
@@ -158,37 +161,31 @@ void partVIII()
   }
   motors.setSpeeds(0,0);
   PAUSE
-  spin(-50);
+  drive(0.5, spd, 1.0f, false); // just to not hit the wall
+  PAUSE
+  spin(-45);
   PAUSE
   drive(3.5, spd, 1.0f, false);
   PAUSE
   drive(3.5, -spd, 1.0f, false);
   PAUSE
-  spin(50);
+  spin(45);
 }
 
 void partIXA()
 {
-  spin(20);
+  spin(25);
   PAUSE
   drive(2, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
   drive(5, RELSPEED_NORMAL, 1.0f, true);
-  PAUSE
 }
 
 void partXA()
 {
-  drive(2, -RELSPEED_NORMAL, 1.0f, false);
-  PAUSE
-  spin(-135);
+  spin(-110);
   PAUSE
   drive(30, RELSPEED_NORMAL, 1.0f, true);
-}
-
-void partXIA()
-{
-  
 }
 
 void partIXB()
@@ -203,7 +200,7 @@ void partIXB()
 
 void partXB()
 {
-  
+
 }
 
 void partXIB()
