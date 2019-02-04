@@ -28,7 +28,6 @@ void partXA();
 void partIXB();
 void partXB();
 void partXIB();
-void partXIIB();
 
 void setup() {
   // Set up the LED
@@ -189,24 +188,23 @@ void partXA()
 
 void partIXB()
 {
-  spin(65);
+  spin(45);
   PAUSE
   drive(2, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
   drive(5, RELSPEED_NORMAL, 1.0f, true);
-  PAUSE
 }
 
 void partXB()
 {
-
+  drive(5, -RELSPEED_ALMOSTNORMAL, 1.0f, false);
+  spin(-50);
+  drive(5, RELSPEED_ALMOSTNORMAL, 1.0f, true);
 }
 
 void partXIB()
 {
-  drive(2, -RELSPEED_NORMAL, 1.0f, false);
-  PAUSE
-  spin(-135);
+  spin(-90);
   PAUSE
   drive(30, RELSPEED_NORMAL, 1.0f, true);
 }
