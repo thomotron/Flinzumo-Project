@@ -18,9 +18,15 @@ void partV();
 void partVI();
 void partVII();
 void partVIII();
-void partIX();
-void partX();
-void partXI();
+
+// Path A (preferred, but lazy)
+void partIXA();
+void partXA();
+
+// Path B
+void partIXB();
+void partXB();
+void partXIB();
 
 void setup() {
   // Wait until we're ready to calibrate
@@ -143,7 +149,7 @@ void partVIII()
 
 void partIXA()
 {
-  spin(50);
+  spin(40);
   PAUSE
   drive(2, RELSPEED_NORMAL*MAX_SPEED, 1, false);
   PAUSE
@@ -152,6 +158,30 @@ void partIXA()
 }
 
 void partXA()
+{
+  drive(2, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  PAUSE
+  spin(-135);
+  PAUSE
+  drive(30, RELSPEED_NORMAL*MAX_SPEED, 1, true);
+}
+
+void partIXB()
+{
+  spin(65);
+  PAUSE
+  drive(2, RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  PAUSE
+  drive(5, RELSPEED_NORMAL*MAX_SPEED, 1, true);
+  PAUSE
+}
+
+void partXB()
+{
+  
+}
+
+void partXIB()
 {
   drive(2, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
   PAUSE
