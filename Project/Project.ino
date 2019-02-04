@@ -1,7 +1,7 @@
 
 #include "ZumoHelper.h"
 
-#define DEBUG
+//#define DEBUG
 //#define FLIP_MOTORS
 
 #ifdef DEBUG
@@ -23,7 +23,6 @@ void partVIII();
 // Path A (preferred, but lazy)
 void partIXA();
 void partXA();
-void partXIA();
 
 // Path B
 void partIXB();
@@ -70,11 +69,6 @@ void loop() {
   partIXA();
   PAUSE
   partXA();
-  PAUSE
-  PAUSE
-  PAUSE
-  PAUSE
-  //partXIA();
   PAUSE
 }
 
@@ -179,29 +173,18 @@ void partVIII()
 
 void partIXA()
 {
-  spin(20);
+  spin(25);
   PAUSE
   drive(2, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
   drive(5, RELSPEED_NORMAL, 1.0f, true);
-  PAUSE
 }
 
 void partXA()
 {
-  drive(2, -RELSPEED_NORMAL, 1.0f, false);
-  PAUSE
-  spin(-135);
+  spin(-110);
   PAUSE
   drive(30, RELSPEED_NORMAL, 1.0f, true);
-}
-
-void partXIA()
-{
-  float spd = RELSPEED_ALMOSTNORMAL;
-  spin(30); // 90 but wha?
-  PAUSE
-  drive(20, spd, 1.0f, true);
 }
 
 void partIXB()

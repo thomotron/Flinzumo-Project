@@ -21,7 +21,7 @@ Pushbutton button(ZUMO_BUTTON);
 // 4.5v  @ 3.75
 // 4.2v  @ 4.5
 // See https://docs.google.com/spreadsheets/d/1VfWMEkVNKwyjC4wNBs2La0Xxqw591FsvnoYbH0FLOD4/edit?usp=sharing
-#define SPIN_MS_PER_DEG 2.35
+#define SPIN_MS_PER_DEG 2.5
 
 // Corrects the left/right veer for the Zumo by adding to ratioLR in drive()
 // Positive values veer right, negative left
