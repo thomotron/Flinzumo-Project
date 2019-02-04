@@ -23,11 +23,13 @@ void partVIII();
 // Path A (preferred, but lazy)
 void partIXA();
 void partXA();
+void partXIA();
 
 // Path B
 void partIXB();
 void partXB();
 void partXIB();
+void partXIIB();
 
 void setup() {
   // Set up the LED
@@ -143,9 +145,10 @@ void partVII()
 
 void partVIII()
 {
+  float spd = RELSPEED_SLOW;
   spin(-90);
   PAUSE
-  motors.setSpeeds(RELSPEED_NORMAL*MAX_SPEED, RELSPEED_NORMAL*MAX_SPEED);
+  motors.setSpeeds(spd*MAX_SPEED, spd*MAX_SPEED);
   unsigned int sensors[6];
   refSensors.readLine(sensors);
   while(sensors[5] < REFLECTANCE_THRESHOLD) // wait til line on right
@@ -156,39 +159,44 @@ void partVIII()
   PAUSE
   spin(-50);
   PAUSE
-  drive(3, RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  drive(3.5, spd, 1.0f, false);
   PAUSE
-  drive(3, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  drive(3.5, -spd, 1.0f, false);
   PAUSE
   spin(50);
 }
 
 void partIXA()
 {
-  spin(40);
+  spin(20);
   PAUSE
-  drive(2, RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  drive(2, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
-  drive(5, RELSPEED_NORMAL*MAX_SPEED, 1, true);
+  drive(5, RELSPEED_NORMAL, 1.0f, true);
   PAUSE
 }
 
 void partXA()
 {
-  drive(2, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  drive(2, -RELSPEED_NORMAL, 1.0f, false);
   PAUSE
   spin(-135);
   PAUSE
-  drive(30, RELSPEED_NORMAL*MAX_SPEED, 1, true);
+  drive(30, RELSPEED_NORMAL, 1.0f, true);
+}
+
+void partXIA()
+{
+  
 }
 
 void partIXB()
 {
   spin(65);
   PAUSE
-  drive(2, RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  drive(2, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
-  drive(5, RELSPEED_NORMAL*MAX_SPEED, 1, true);
+  drive(5, RELSPEED_NORMAL, 1.0f, true);
   PAUSE
 }
 
@@ -199,9 +207,9 @@ void partXB()
 
 void partXIB()
 {
-  drive(2, -RELSPEED_NORMAL*MAX_SPEED, 1, false);
+  drive(2, -RELSPEED_NORMAL, 1.0f, false);
   PAUSE
   spin(-135);
   PAUSE
-  drive(30, RELSPEED_NORMAL*MAX_SPEED, 1, true);
+  drive(30, RELSPEED_NORMAL, 1.0f, true);
 }
