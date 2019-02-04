@@ -2,6 +2,7 @@
 #include "ZumoHelper.h"
 
 //#define DEBUG
+#define FLIP_MOTORS
 
 #ifdef DEBUG
   #define PAUSE button.waitForButton();
@@ -23,6 +24,12 @@ void partX();
 void partXI();
 
 void setup() {
+  // Flip the motors if we need to
+  #ifdef FLIP_MOTORS
+    motors.flipLeftMotor(true);
+    motors.flipRightMotor(true);
+  #endif
+  
   // Wait until we're ready to calibrate
   button.waitForButton();
 
