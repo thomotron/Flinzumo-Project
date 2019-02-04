@@ -44,10 +44,13 @@ void setup() {
   digitalWrite(13, LOW);
 
   // Wait until we're ready to start
-  //button.waitForButton();
-  lineAlign();
+  button.waitForButton();
+  
   // Run each part
-  //partII();
+  partI();
+  partII();
+  partIII();
+  partIV();
 }
 
 void loop() {
