@@ -23,6 +23,10 @@ Pushbutton button(ZUMO_BUTTON);
 // See https://docs.google.com/spreadsheets/d/1VfWMEkVNKwyjC4wNBs2La0Xxqw591FsvnoYbH0FLOD4/edit?usp=sharing
 #define SPIN_MS_PER_DEG 4.5
 
+// Corrects the left/right veer for the Zumo by adding to ratioLR in drive()
+// Positive values veer right, negative left
+#define VEER_RATIO_CORRECTION 0.02
+
 #define MAX_SPEED 400
 #define REFLECTANCE_THRESHOLD 500
 
@@ -71,6 +75,8 @@ void spin(int angle) // angle in degrees. + is c, - is cc
 
 void drive(float ds, float relSpeed, float ratioLR, bool stopAtLine)
 {
+  ratioLR = ratioLR + VEER_RATIO_CORRECTION;
+  
   if(ratioLR < 1.0f)
   {
     motors.setSpeeds(MAX_SPEED*relSpeed*ratioLR, MAX_SPEED*relSpeed);
