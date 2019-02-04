@@ -59,6 +59,9 @@ void setup() {
   partII();
   partIII();
   partIV();
+  partV();
+  partVI();
+  partVII();
 }
 
 void loop() {
@@ -120,23 +123,21 @@ void partIV()
 
 void partV()
 {
-  drive(0.5, -RELSPEED_NORMAL, 1.0f, false);  // move back away from building slightly
+  spin(-110);                           // Turn to face north
   PAUSE
-  spin(-105);                               // spin face N
-  PAUSE
-  drive(3, RELSPEED_NORMAL, 1.0f, true);  // drive till line
+  drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the shop on the corner
 }
 
 void partVI()
 {
-  spin(-160);                           // Turn to face the south west
+  spin(-150);                           // Turn to face the south west
   PAUSE
   drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the man stranded on the island
 }
 
 void partVII()
 {
-  drive(5, RELSPEED_NORMAL, 1, false);  // Reverse back from the island
+  drive(2, -RELSPEED_NORMAL, 1, false);  // Reverse back from the island
   spin(45);                             // Spin 45 degrees to face west
   drive(20, RELSPEED_NORMAL, 1, true);  // Push the sandbags until we hit the alignment line
   drive(5, RELSPEED_NORMAL, 1, false);  // Push the sandbags into the safe zone
