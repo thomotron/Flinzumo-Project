@@ -61,6 +61,9 @@ void setup() {
   partVI();
   partVII();
   partVIII();
+  partIXB();
+  partXB();
+  partXIB();
 }
 
 void partI()
