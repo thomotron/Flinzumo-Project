@@ -60,18 +60,7 @@ void setup() {
   partV();
   partVI();
   partVII();
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
-  button.waitForButton();
   partVIII();
-  PAUSE
-  partIXA();
-  PAUSE
-  partXA();
-  PAUSE
 }
 
 void partI()
