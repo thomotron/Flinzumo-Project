@@ -27,6 +27,9 @@ Pushbutton button(ZUMO_BUTTON);
 // Positive values veer right, negative left
 #define VEER_RATIO_CORRECTION 0.00
 
+// Scales the time spent driving to correct for battery charge
+#define DRIVE_TIME_SCALING 1
+
 #define MAX_SPEED 400
 #define REFLECTANCE_THRESHOLD 500
 
@@ -76,7 +79,11 @@ void spin(int angle) // angle in degrees. + is c, - is cc
 
 void drive(float ds, float relSpeed, float ratioLR, bool stopAtLine)
 {
+  // Correct the speed ratio if the Zumo has veering problems
   ratioLR = ratioLR + VEER_RATIO_CORRECTION;
+
+  // Correct the drive time for battery level changes
+  ds = ds * DRIVE_TIME_SCALING;
   
   if(ratioLR < 1.0f)
   {
