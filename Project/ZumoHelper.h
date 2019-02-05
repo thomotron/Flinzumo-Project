@@ -53,16 +53,8 @@ void lineCalibrate()
 {
   for(int i = 0; i < 80; i++)
   {
-    if((i > 10 && i <= 30) || (i > 50 && i <= 70))
-    {
-//      motors.setSpeeds(-200, 200);
-    }
-    else
-    {
-//      motors.setSpeeds(200,-200);
-    }
     refSensors.calibrate();
-    delay(20); // Total delay of 20*80 = 1600 ms
+    delay(10); // Total delay of 10*80 = 800 ms
   }
 
   // Stop the motors after calibrating
