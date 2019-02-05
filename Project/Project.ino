@@ -13,7 +13,7 @@
 
 #ifdef HIGH_POWER
   // Overwrite the normal speed definition in this file
-  #define RELSPEED_NORMAL RELSPEED_NORMAL
+  #define RELSPEED_NORMAL RELSPEED_ALMOSTNORMAL
 #endif
 
 // Solve each part of the maze
