@@ -148,24 +148,21 @@ void partVII()
 void partVIII()
 {
   float spd = RELSPEED_SLOW;
-  spin(-90);
+  drive(3.0f, spd, 1.0f, false);
   PAUSE
-  motors.setSpeeds(spd*MAX_SPEED, spd*MAX_SPEED);
-  unsigned int sensors[6];
-  refSensors.readLine(sensors);
-  while(sensors[5] < REFLECTANCE_THRESHOLD) // wait til line on right
-  {
-    refSensors.readLine(sensors);
-  }
-  motors.setSpeeds(0,0);
+  spin(-85); // turns weird on the seam
   PAUSE
-  drive(0.5, spd, 1.0f, false); // just to not hit the wall
+  lineFollow(1000, false);
+  PAUSE
+  lineFollow(3000, true);
+  PAUSE
+  drive(0.8f, spd, 1.0f, false); // just to not hit the wall
   PAUSE
   spin(-45);
   PAUSE
-  drive(3.5, spd, 1.0f, false);
+  drive(3.0f, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
-  drive(3.5, -spd, 1.0f, false);
+  drive(3.0f, -RELSPEED_NORMAL, 1.0f, false);
   PAUSE
   spin(45);
 }
@@ -174,20 +171,22 @@ void partIXA()
 {
   spin(25);
   PAUSE
-  drive(2, RELSPEED_NORMAL, 1.0f, false);
+  drive(3.0f, RELSPEED_NORMAL, 1.0f, false);
   PAUSE
-  drive(5, RELSPEED_NORMAL, 1.0f, true);
+  drive(5.0f, RELSPEED_NORMAL, 1.0f, true);
 }
 
 void partXA()
 {
   spin(-110);
   PAUSE
-  drive(30, RELSPEED_NORMAL, 1.0f, true);
+  drive(30.0f, RELSPEED_NORMAL, 1.0f, true);
 }
 
 void partIXB()
 {
+  drive(1, RELSPEED_NORMAL, 1.0f, false);
+  PAUSE
   spin(45);
   PAUSE
   drive(2, RELSPEED_NORMAL, 1.0f, false);
@@ -197,14 +196,14 @@ void partIXB()
 
 void partXB()
 {
-  drive(5, -RELSPEED_ALMOSTNORMAL, 1.0f, false);
-  spin(-50);
-  drive(5, RELSPEED_ALMOSTNORMAL, 1.0f, true);
+  drive(5.0f, -RELSPEED_ALMOSTNORMAL, 1.0f, false);
+  spin(-55);
+  drive(5.0f, RELSPEED_ALMOSTNORMAL, 1.0f, true);
 }
 
 void partXIB()
 {
   spin(-90);
   PAUSE
-  drive(30, RELSPEED_NORMAL, 1.0f, true);
+  drive(30.0f, RELSPEED_NORMAL, 1.0f, true);
 }
