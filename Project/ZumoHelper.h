@@ -1,3 +1,6 @@
+// Written by Greg Howell and Thomas Wade
+// Feb 2019
+
 /* This file contains all the helper functions we use in Project.ino
  *
  *
