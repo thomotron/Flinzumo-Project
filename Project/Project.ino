@@ -3,11 +3,17 @@
 
 //#define DEBUG
 //#define FLIP_MOTORS
+//#define HIGH_POWER
 
 #ifdef DEBUG
   #define PAUSE button.waitForButton();
 #else
   #define PAUSE delay(300);
+#endif
+
+#ifdef HIGH_POWER
+  // Overwrite the normal speed definition in this file
+  #define RELSPEED_NORMAL RELSPEED_NORMAL
 #endif
 
 // Solve each part of the maze
