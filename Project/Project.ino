@@ -74,13 +74,13 @@ void partI()
 
 void partII()
 {
-  drive(2, RELSPEED_ALMOSTNORMAL, 1, false);  // Drive forward a little
+  drive(2, RELSPEED_NORMAL, 1, false);  // Drive forward a little
   PAUSE
   spin(-45);                            // Turn left a little
   PAUSE
-  drive(2, RELSPEED_ALMOSTNORMAL, 1, false);  // Push the bottle cap in
+  drive(2, RELSPEED_NORMAL, 1, false);  // Push the bottle cap in
   PAUSE
-  drive(2, -RELSPEED_ALMOSTNORMAL, 1, false); // Back up, Terry!
+  drive(2, -RELSPEED_NORMAL, 1, false); // Back up, Terry!
   PAUSE
   spin(90);                             // Turn to face the embassy
   PAUSE
