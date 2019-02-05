@@ -83,19 +83,21 @@ void partI()
 
 void partII()
 {
-  drive(5, RELSPEED_NORMAL, 0.3, false);  // Veer left into the bottle cap
+  drive(2, RELSPEED_ALMOSTNORMAL, 1, false);  // Drive forward a little
   PAUSE
-  drive(10, -RELSPEED_NORMAL, 0.3, true); // Return to where we started
+  spin(-45);                            // Turn left a little
   PAUSE
-  drive(2, RELSPEED_NORMAL, 1, false);    // Drive forward a bit so we miss the corner
+  drive(2, RELSPEED_ALMOSTNORMAL, 1, false);  // Push the bottle cap in
   PAUSE
-  spin(45);                               // Turn to face the embassy
+  drive(2, -RELSPEED_ALMOSTNORMAL, 1, false); // Back up, Terry!
   PAUSE
-  drive(4, RELSPEED_NORMAL, 1, false);    // Drive a little
+  spin(90);                             // Turn to face the embassy
   PAUSE
-  spin(45);                               // Turn to face the alignment line
+  drive(4, RELSPEED_NORMAL, 1, false);  // Drive a little
   PAUSE
-  drive(10, RELSPEED_NORMAL, 1, true);    // Drive until we hit the embassy
+  spin(45);                             // Turn to face the alignment line
+  PAUSE
+  drive(10, RELSPEED_NORMAL, 1, true);  // Drive until we hit the embassy
 }
 
 void partIII()
