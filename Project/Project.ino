@@ -126,7 +126,7 @@ void partV()
 
 void partVI()
 {
-  spin(-150);                           // Turn to face the south west
+  spin(-160);                           // Turn to face the south west
   PAUSE
   drive(10, RELSPEED_NORMAL, 1, true);  // Drive up to the man stranded on the island
 }
