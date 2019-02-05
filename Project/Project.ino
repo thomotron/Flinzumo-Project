@@ -72,6 +72,8 @@ void setup() {
   partXIB();
 }
 
+void loop(){}
+
 void partI()
 {
   drive(5, RELSPEED_NORMAL, 1, false); // Leave the starting gate
