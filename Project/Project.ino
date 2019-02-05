@@ -142,8 +142,10 @@ void partVI()
 
 void partVII()
 {
-  drive(2, -RELSPEED_NORMAL, 1, false);  // Reverse back from the island
-  spin(45);                             // Spin 45 degrees to face west
+  drive(5, -RELSPEED_NORMAL, 1, false);  // Reverse back from the island
+  PAUSE
+  spin(50);                             // Spin to face west
+  PAUSE
   drive(20, RELSPEED_NORMAL, 1, true);  // Push the sandbags until we hit the alignment line
   drive(5, RELSPEED_NORMAL, 1, false);  // Push the sandbags into the safe zone
   drive(5, -RELSPEED_NORMAL, 1, true);  // Back up the the alignment line
