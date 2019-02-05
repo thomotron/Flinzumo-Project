@@ -198,12 +198,14 @@ void lineFollow(int ms, bool stopAtLine)
   int movSpeed = 0.5*MAX_SPEED;
   int lastError = 0;
   unsigned int sensors[6];
+  int pos = refSensors.readLine(sensors);
 
-  auto startTime = micros();
+  unsigned long startTime = millis();
+  int dt = 0;
 
-  while((stopAtLine && (sensors[0] < REFLECTANCE_THRESHOLD && sensors[5] < REFLECTANCE_THRESHOLD)) || ((micros() - startTime) < ms))
+  while((stopAtLine && (sensors[0] < REFLECTANCE_THRESHOLD) && (sensors[5] < REFLECTANCE_THRESHOLD)) || (!stopAtLine && (dt < ms)))
   {
-    int pos = refSensors.readLine(sensors);
+    pos = refSensors.readLine(sensors);
     int error = pos - 2500;
     int speedDifference = error * 1/3 + 3 * (error - lastError);
     lastError = error;
@@ -216,6 +218,7 @@ void lineFollow(int ms, bool stopAtLine)
     m1Speed = (abs(m1Speed) + m1Speed)/2 - ((m1Speed-movSpeed) + abs(m1Speed - movSpeed))/2;
     m2Speed = (abs(m2Speed) + m2Speed)/2 - ((m2Speed-movSpeed) + abs(m2Speed - movSpeed))/2;
     motors.setSpeeds(m1Speed, m2Speed);
+    dt = (int)millis() - (int)startTime;
   }
 
  motors.setSpeeds(0, 0);
